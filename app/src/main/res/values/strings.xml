@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">GotoSumbar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lokasi_loading">Lokasi Loading...</string>
+    <string name="loading">Loading...</string>
+    <string name="_5">5.0</string>
+    <string name="description">Description</string>
+    <string name="like">Like</string>
+    <string name="name_loading">Name Loading...</string>
+    <string name="komen">Komentar</string>
+    <string name="desc">Deskripsi</string>
+    <string name="ketikkan_komentar">Ketikkan Komentar...</string>
+    <string name="about">Selamat datang di GoToSumbar, aplikasi terdepan untuk merencanakan perjalanan wisata di Sumatra Barat. Kami mempersembahkan pengalaman eksplorasi yang tak terlupakan dengan berbagai fitur unggulan. Temukan destinasi wisata yang cocok dengan preferensi Anda melalui fitur pencarian canggih, tandai tempat favorit Anda, dan pantau statistik perjalanan langsung dari dashboard utama. Dapatkan informasi mendalam tentang setiap tempat wisata, nikmati notifikasi terkini, dan jelajahi berbagai kategori wisata sesuai minat Anda. Di samping itu, FAQ lengkap kami memberikan jawaban atas pertanyaan umum Anda, dan fitur pengaturan memungkinkan Anda menyesuaikan pengalaman Anda. GoToSumbar tidak hanya membantu merencanakan perjalanan Anda, tetapi juga menyediakan tips wisata menarik, riwayat kunjungan, dan dukungan bantuan langsung. Menjadikan setiap petualangan di Sumatra Barat lebih berkesan, unduh sekarang dan mulai menjelajahi!</string>
+    <string name="report">Report technical problem</string>
+    <string name="hint">Briefly explain what happened or what’s not working.</string>
+    <string name="data1">This app is designed to provide users with travel recommendations in West Sumatra based on their preferences. Learn more about its features and purpose in the \'About\' section.</string>
+    <string name="feedback">Give your best rating to our application</string>
+    <string name="reason">Give your best reasons for our application</string>
+</resources>
