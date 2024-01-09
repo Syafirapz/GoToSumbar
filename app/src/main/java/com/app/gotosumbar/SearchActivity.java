@@ -34,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        //  Set Up Rv
+        // Inisialisasi RecyclerView untuk menampilkan hasil pencarian
         rv = findViewById(R.id.rvSearch);
         adapter = new SearchAdapter(this, list);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -42,18 +42,19 @@ public class SearchActivity extends AppCompatActivity {
         rv.setVisibility(View.INVISIBLE);
 
 
-        //  Fetching Data to Adapter
+        // Mendapatkan data dari Firebase Database dan menampilkannya dalam adapter
         ValueEventListener value = new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                adapter.clear();
+                adapter.clear(); // Bersihkan adapter sebelum menambahkan data baru
 
+                // Loop melalui hasil snapshot untuk menambahkan data ke dalam list
                 for (DataSnapshot snap: snapshot.getChildren()){
                     TempatWisata data = snap.getValue(TempatWisata.class);
                     list.add(data);
                 }
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged(); // Perbarui tampilan setelah menambahkan data baru
             }
 
             @Override
@@ -62,11 +63,12 @@ public class SearchActivity extends AppCompatActivity {
             }
         };
 
-        //  kueri data
+        
+        // Query data dari Firebase Database untuk ditampilkan dalam pencarian
         Query addData = FirebaseDatabase.getInstance().getReference("Wisata");
         addData.addValueEventListener(value);
 
-        //  fitur Cari
+        // Inisialisasi SearchView dan memberikan respons saat teks berubah
          SearchView cari = findViewById(R.id.searchView);
          cari.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
              @Override
@@ -74,18 +76,20 @@ public class SearchActivity extends AppCompatActivity {
                  return false;
              }
 
+              // Saat teks berubah dalam SearchView, panggil metode filterData() untuk melakukan filter pada data
              @Override
              public boolean onQueryTextChange(String newText) {
                  filterData(newText);
                  return false;
              }
          });
-
+        // Pengaturan Bottom Navigation
         BottomNavigationView navbar = findViewById(R.id.botNavbar);
         navbar.setSelectedItemId(R.id.search);
         navbar.setItemIconTintList(null);
         navbar.setOnItemSelectedListener(i -> {
             int itemId = i.getItemId();
+             // Menangani pemilihan item pada bottom navigation dan memanggil activity yang sesuai
             if (itemId == R.id.search) {
                 return true;
             } else if (itemId == R.id.akun) {
