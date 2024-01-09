@@ -40,7 +40,7 @@ import com.squareup.picasso.Picasso;
 
 
 public class DetailWisataActivity extends AppCompatActivity {
-
+    // Inisialisasi elemen UI
     ImageView poto, like, send;
     TextView nama, lokasi, rating;
     RatingBar rateBar;
@@ -55,16 +55,19 @@ public class DetailWisataActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        // Bottom Navigation dipilih ketika activity dimulai
         navbar = findViewById(R.id.navbar);
         navbar.setSelectedItemId(R.id.about);
         navbar.setOnItemSelectedListener(i -> {
             int id = i.getItemId();
             if (id == R.id.about) {
+                // Memilih fragment AboutFragment ketika item about dipilih
                 Fragment f = new AboutFragment();
                 FragmentTransaction t = getSupportFragmentManager().beginTransaction();
                 t.replace(R.id.frame, f).commit();
                 return true;
             } else if (id == R.id.review) {
+                // Memilih fragment ReviewFragment ketika item review dipilih
                 Fragment f = new ReviewFragment();
                 FragmentTransaction t = getSupportFragmentManager().beginTransaction();
                 t.replace(R.id.frame, f).commit();
@@ -72,7 +75,7 @@ public class DetailWisataActivity extends AppCompatActivity {
             }
             return false;
         });
-        navbar.performClick();
+        navbar.performClick(); // Memulai aktivitas navigasi bottom secara otomatis
     }
 
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
@@ -82,7 +85,7 @@ public class DetailWisataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_wisata);
 
-        //  define id
+        // Inisialisasi elemen UI
         btnBack = findViewById(R.id.BtnBack);
         nama = findViewById(R.id.tvNamaDetail);
         lokasi = findViewById(R.id.tvLocDetail);
@@ -94,7 +97,7 @@ public class DetailWisataActivity extends AppCompatActivity {
         edKomen = findViewById(R.id.edKomen);
         send = findViewById(R.id.send);
 
-        //  Get Data from Intent
+        //Mendapatkan data dari Intent dan menampilkannya pada UI
         int dataId = getIntent().getIntExtra("id", 1);
         String urlPoto = getIntent().getStringExtra("poto");
         String dataNama = getIntent().getStringExtra("nama");
@@ -121,7 +124,7 @@ public class DetailWisataActivity extends AppCompatActivity {
             lokasi.setText(dataLok);
         }
 
-        //  Send Komen to database
+         // Set tindakan tombol 'send' untuk mengirim komentar ke database
         send.setOnClickListener(v -> {
             //  Komen
             String dataKomen = edKomen.getText().toString();
@@ -205,7 +208,7 @@ public class DetailWisataActivity extends AppCompatActivity {
                 edKomen.getText().clear();
             }
         });
-
+        // Set tindakan tombol 'like' untuk menampilkan notifikasi ketika diklik
         like.setOnClickListener(v -> {
             //  Register Notification Channel
             NotificationChannel channel = new NotificationChannel("Test", "App gotoSumbar", NotificationManager.IMPORTANCE_HIGH);
@@ -235,27 +238,29 @@ public class DetailWisataActivity extends AppCompatActivity {
         //  Back Button
         btnBack.setOnClickListener(v -> super.onBackPressed());
 
-        //  Navbar For Fragment
+        //  Mengatur navigasi bottom untuk menampilkan fragment yang sesuai
         navbar.setSelectedItemId(R.id.about);
         navbar.setOnItemSelectedListener(i -> {
             int id = i.getItemId();
             if (id == R.id.about) {
+                 // Menampilkan fragment AboutFragment
                 showFragmentAbout();
                 return true;
             } else if (id == R.id.review) {
+                 // Menampilkan fragment ReviewFragment
                 showFragmentReview();
                 return true;
             }
             return false;
         });
     }
-
+    // Metode untuk menampilkan fragment ReviewFragment
     private void showFragmentReview() {
         Fragment f = new ReviewFragment();
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         t.replace(R.id.frame, f).commit();
     }
-
+    // Metode untuk menampilkan fragment AboutFragment
     private void showFragmentAbout() {
         Fragment f = new AboutFragment();
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
