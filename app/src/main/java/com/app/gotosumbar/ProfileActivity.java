@@ -215,11 +215,15 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
     private void uploadToFirebase(Bitmap bitmap){
+        // Mendapatkan referensi penyimpanan di Firebase
         StorageReference fileRef = storage.getReference().child("image/" + uid);
+
+         // Mengompres gambar ke dalam byte array
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
+        // Mengunggah gambar ke Firebase Storage
         UploadTask uploadTask = fileRef.putBytes(data);
         uploadTask.continueWithTask(task -> {
            if (!task.isSuccessful()){
@@ -228,8 +232,10 @@ public class ProfileActivity extends AppCompatActivity {
             return fileRef.getDownloadUrl();
         }).addOnCompleteListener(task1 -> {
             if (task1.isSuccessful()){
+                // Jika berhasil, mendapatkan URL download gambar
                 Uri download = task1.getResult();
 
+                // Memperbarui URL gambar profil di database pengguna
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference("Users").child(uid);
                 database.child("userImage").setValue(download.toString()).addOnCompleteListener(task2 -> {
                     if (task2.isSuccessful()) {
@@ -241,7 +247,10 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void upToFirebase(Uri uri){
+        // Mendapatkan referensi penyimpanan di Firebase
         StorageReference fileRef = storage.getReference().child("image/" + uid);
+
+         // Mengunggah gambar ke Firebase Storage
         UploadTask uploadImg = fileRef.putFile(uri);
 
         uploadImg.continueWithTask(task -> {
@@ -251,8 +260,10 @@ public class ProfileActivity extends AppCompatActivity {
             return fileRef.getDownloadUrl();
         }).addOnCompleteListener(task -> {
             if (task.isSuccessful()){
+                // Jika berhasil, mendapatkan URL download gambar
                 Uri download = task.getResult();
 
+                // Memperbarui URL gambar profil di database pengguna
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference("Users").child(uid);
                 database.child("userImage").setValue(download.toString()).addOnCompleteListener(task1 -> {
                     if (task.isSuccessful()) {
